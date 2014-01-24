@@ -18,22 +18,17 @@ public class DataSetWebLoaderScript : MonoBehaviour
 	private Dictionary<string,string> filemapDictionary;
 	
 	
-	//TODO SETPREF ETC FOR FIGURING OUT WHAT WE HAVE ALREADY
-	
-	// Use this for initialization
+	//TODO SETPREF ETC FOR FIGURING OUT WHAT WE HAVE ALREAD
+
 
 	
 	void Start ()
 	{
-
 		StartCoroutine(loadIndex());
-
 	}
-	
 	
 
 	#region helpers
-	
 		private void xx (string s)
 	{
 		Debug.Log (s);
@@ -47,7 +42,6 @@ public class DataSetWebLoaderScript : MonoBehaviour
 		else
 			return false;
 	}
-
 	#endregion
 	
 
@@ -56,9 +50,14 @@ public class DataSetWebLoaderScript : MonoBehaviour
 	private IEnumerator loadIndex ()
 	{
 		 	List<string> dList=new List<string>();
-			dList.Add("stahre");
+			//dList.Add("stahre");
+		/*
 			dList.Add("dnfront");
-			dList.Add("dnromer");
+			dList.Add("dnromer");*/
+			dList.Add("estrid");
+			dList.Add("malmbergs");
+		
+
 		string[] extensions= {".xml",".dat"};
 			
 			foreach (string filename in dList) {
@@ -84,7 +83,7 @@ public class DataSetWebLoaderScript : MonoBehaviour
 					Debug.Log ("wwww error " + _currentwww.error+"  file "+filename);
 					continue;
 				} else {
-					Debug.Log ("wwww OK " + uri + "  size " + _currentwww.bytes);	
+					Debug.Log ("wwww OK " + uri + "  progress " + _currentwww.bytes.Length);	
 					Debug.Log ("file exist " + File.Exists (_targetFilePath) + "  for " + _targetFilePath);
 				}
 					
@@ -94,13 +93,11 @@ public class DataSetWebLoaderScript : MonoBehaviour
 					yield return new WaitForSeconds(0.1f);
 				}
 				Debug.Log ("file written " + _targetFilePath);
-		
-			
 			}
 			}
 	
 		
-			Debug.Log ("End Load");
+		Debug.Log ("End Load");
 		Application.LoadLevel(1);
 		
 	}
