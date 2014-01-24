@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class DataSetWebLoaderScript : MonoBehaviour
 {
 	private string _webUrl = "http://www.fingerfunk.se/dynamic/StreamingAssets/";
+	private string _webMarkerList="http://www.fingerfunk.se/dynamic/StreamingAssets/markerList.php";
 	private bool _isDone;
 	private WWW _currentwww;
 	private bool _downloadStarted;
@@ -44,7 +45,16 @@ public class DataSetWebLoaderScript : MonoBehaviour
 	}
 	#endregion
 	
+	private IEnumerator checkAvailableMarkersOnServer(){
 
+		WWW www = new WWW (_webMarkerList);
+		yield return www;
+		if (www.error != null) {
+			Debug.Log ("wwww checkAvailableMarkersOnServer error " + www.error);
+		} else {
+			Debug.Log ("markerlist OK " + _webMarkerList + "  progress " + www.text);	
+		}
+	}
 	
 	//loading of all external files here
 	private IEnumerator loadIndex ()
